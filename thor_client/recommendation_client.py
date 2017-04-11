@@ -15,6 +15,7 @@ class RecommendationClient(object):
         """Submit the returned metric value for a point that was recommended by
         the Bayesian optimization routine.
         """
+        assert isinstance(value, float)
         post_data = {
             "auth_token": self.auth_token,
             "recommendation_id": self.recommendation_id,
@@ -30,6 +31,6 @@ class RecommendationClient(object):
     def from_dict(cls, dictionary, auth_token):
         return cls(
             identifier=dictionary["id"],
-            config=json.loads(dictionary["x"]),
+            config=json.loads(dictionary["config"]),
             auth_token=auth_token
         )

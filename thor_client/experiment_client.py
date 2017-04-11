@@ -27,6 +27,20 @@ class ExperimentClient(object):
         )
         return json_parser(result, self.auth_token, RecommendationClient)
 
+    def best_configuration(self):
+        """Get the configuration of parameters that produced the best value of
+        the objective function.
+        """
+        post_data = {
+            "auth_token": self.auth_token,
+            "experiment_id": self.experiment_id
+        }
+        result = requests.post(
+            url=base_url.format("best_configuration"),
+            json=post_data
+        )
+        return json_parser(result, self.auth_token)
+
     def pending_recommendations(self):
         """Query for pending recommendations that have yet to be evaluated."""
         post_data = {

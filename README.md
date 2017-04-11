@@ -6,4 +6,4 @@ Thor Client is a client-side interface for Thor Server, which together provide a
 
 1. Clone this repository. `git clone git@github.com:JamesBrofos/Thor-Client.git`
 2. Run the `setup.py` function to install the client-side software: `python setup.py install`
-3. Make sure you have signed up for an account with Thor by visiting Thor's website: 
+3. Make sure you have signed up for an account with Thor by visiting Thor's website: [Thor](http://127.0.0.1:5000/)
