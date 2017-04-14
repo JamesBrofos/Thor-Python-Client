@@ -15,6 +15,22 @@ class ExperimentClient(object):
         self.dims = dims
         self.auth_token = auth_token
 
+    def submit_observation(self, config, target):
+        """Upload a pairing of a configuration alongside an observed target
+        variable.
+        """
+        post_data = {
+            "auth_token": self.auth_token,
+            "experiment_id": self.experiment_id,
+            "configuration": json.dumps(config),
+            "target": target
+        }
+        result = requests.post(
+            url=base_url.format("submit_observation"),
+            json=post_data
+        )
+        return json_parser(result, self.auth_token)
+
     def create_recommendation(self):
         """Get a recommendation for a point to evaluate next."""
         post_data = {

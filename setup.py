@@ -33,6 +33,9 @@ setup(
     license="Copyright (c) James Brofos 2017",
     packages=find_packages(exclude="tests"),
     long_description=read("README.md"),
+    install_requires=[
+        'flask_api',
+    ],
     cmdclass={
         "clean": CleanCommand,
     }
