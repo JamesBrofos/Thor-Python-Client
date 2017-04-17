@@ -1,9 +1,9 @@
-# Thor Client
+# Thor Python Client
 
-Thor Client is a client-side interface for Thor Server, which together provide a light-weight and powerful architecture for Bayesian optimization.
+This repository contains the Thor Python Client, which is a client-side interface for Thor Server. The Thor Server and Thor Python Client together provide a light-weight and powerful architecture for Bayesian optimization in Python.
 
 ## Installation
 
-1. Clone this repository. `git clone git@github.com:JamesBrofos/Thor-Client.git`
+1. Clone this repository. `git clone git@github.com:JamesBrofos/Thor-Python-Client.git`
 2. Run the `setup.py` function to install the client-side software: `python setup.py install`
 3. Make sure you have signed up for an account with Thor by visiting Thor's website: [Thor](http://127.0.0.1:5000/)
