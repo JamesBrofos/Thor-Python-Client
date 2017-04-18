@@ -16,14 +16,15 @@ class ThorClient(object):
         """Create an experiment."""
         assert isinstance(name, str)
         assert isinstance(acq_func, str)
-        assert isinstance(dimensions, list)
-        for dim in dimensions:
-            assert isinstance(dim["name"], str)
-            assert dim["dim_type"] in (
-                "linear", "logarithmic", "exponential", "integer"
-            )
-            assert isinstance(dim["low"], float) or isinstance(dim["low"], int)
-            assert isinstance(dim["high"], float) or isinstance(dim["high"], int)
+        assert isinstance(dimensions, list) or isinstance(dimensions, dict)
+        if isinstance(dimensions, list):
+            for dim in dimensions:
+                assert isinstance(dim["name"], str)
+                assert dim["dim_type"] in (
+                    "linear", "logarithmic", "exponential", "integer"
+                )
+                assert isinstance(dim["low"], float) or isinstance(dim["low"], int)
+                assert isinstance(dim["high"], float) or isinstance(dim["high"], int)
 
         post_data = {
             "name": name,
