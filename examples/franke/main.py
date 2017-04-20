@@ -24,5 +24,5 @@ for i in range(30):
     # Evaluate new recommendation.
     val = franke(np.array([x["x"], x["y"]]))
     # Submit recommendation.
-    # rec.submit_recommendation(val)
+    rec.submit_recommendation(val)
 
