@@ -12,7 +12,7 @@ class ThorClient(object):
         assert isinstance(auth_token, str)
         self.auth_token = auth_token
 
-    def create_experiment(self, name, dimensions, acq_func):
+    def create_experiment(self, name, dimensions, acq_func="hedge"):
         """Create an experiment."""
         assert isinstance(name, str)
         assert isinstance(acq_func, str)

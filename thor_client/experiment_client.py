@@ -31,11 +31,13 @@ class ExperimentClient(object):
         )
         return json_parser(result, self.auth_token)
 
-    def create_recommendation(self):
+    def create_recommendation(self, rand_prob=None, n_model_iters=None):
         """Get a recommendation for a point to evaluate next."""
         post_data = {
             "auth_token": self.auth_token,
-            "experiment_id": self.experiment_id
+            "experiment_id": self.experiment_id,
+            "n_model_iters": n_model_iters,
+            "rand_prob": rand_prob
         }
         result = requests.post(
             url=base_url.format("create_recommendation"),
