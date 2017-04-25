@@ -1,10 +1,10 @@
 import numpy as np
 from thor_client import ThorClient
-from thor.evaluation import hartmann_6
+from hartmann import hartmann_6
 
 
 # Authentication token.
-auth_token = "YOUR_AUTH_TOKEN"
+auth_token = "$2b$12$.wA/rDDnUeNFoXOxBcJ6ze2ZzIF16ThQMM8hPfvuTwtTwZYVDlpXK"
 
 # Create experiment.
 tc = ThorClient(auth_token)
