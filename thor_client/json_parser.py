@@ -17,7 +17,7 @@ def json_parser(result, auth_token, cls=None):
             encapsulated as a JSON.
         auth_token (str): String containing a user's specific API key provided
             by the Thor server.
-        cls Thor Python class (`ExperimentClient` or `RecommendationClient`): An
+        cls (Thor Python class `ExperimentClient` or `RecommendationClient`): An
             object class representing the kind of object that should be created
             from the data contained in the JSON.
 

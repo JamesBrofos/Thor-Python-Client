@@ -4,7 +4,7 @@ from branin import branin_hoo
 
 
 # Authentication token.
-auth_token = "$2b$12$.wA/rDDnUeNFoXOxBcJ6ze2ZzIF16ThQMM8hPfvuTwtTwZYVDlpXK"
+auth_token = "YOUR_AUTH_TOKEN"
 
 # Create experiment.
 tc = ThorClient(auth_token)

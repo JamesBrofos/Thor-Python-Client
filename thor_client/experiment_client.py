@@ -99,7 +99,7 @@ class ExperimentClient(object):
                 times this parameter epochs are performed.
 
         Returns:
-            recommendation client object: A recommendation client object
+            RecommendationClient: A recommendation client object
                 corresponding to the recommended set of parameters.
         """
         post_data = {
@@ -145,7 +145,7 @@ class ExperimentClient(object):
         of pending recommendations which can then be evaluated by the client.
 
         Returns:
-            list of recommendation client objects: A list of
+            list of RecommendationClient: A list of
                 recommendation client objects, where each element in the list
                 corresponds to a pending observation.
         """
@@ -164,7 +164,8 @@ class ExperimentClient(object):
         """Create an experiment object from a dictionary representation. Pass
         the authentication token as an additional parameter.
 
-        TODO: Can the authentication token be a return parameter?
+        TODO:
+            Can the authentication token be a return parameter?
         """
         return cls(
             identifier=dictionary["id"],

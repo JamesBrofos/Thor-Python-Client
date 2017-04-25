@@ -1,0 +1,553 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>thor_client package &#8212; Thor Python Client 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="thor-client-package">
+<h1>thor_client package<a class="headerlink" href="#thor-client-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-thor_client.base_url">
+<span id="thor-client-base-url-module"></span><h2>thor_client.base_url module<a class="headerlink" href="#module-thor_client.base_url" title="Permalink to this headline">¶</a></h2>
+<p>The url that should be used in contact the Thor server. When Thor is deployed
+locally, it make sense to use the localhost designation. On the other hand, when
+deployed remotely, a particular URL needs to be provided.</p>
+<p class="rubric">Examples</p>
+<p>To use a localhost server:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">base_url</span> <span class="o">=</span> <span class="s2">&quot;http://127.0.0.1:5000/api/</span><span class="si">{}</span><span class="s2">/&quot;</span>
+</pre></div>
+</div>
+<p>To use a designated computer accessible at a given domain and port:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">base_url</span> <span class="o">=</span> <span class="s2">&quot;http://yourserver.com:PORT/api/</span><span class="si">{}</span><span class="s2">/&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="module-thor_client.experiment_client">
+<span id="thor-client-experiment-client-module"></span><h2>thor_client.experiment_client module<a class="headerlink" href="#module-thor_client.experiment_client" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="thor_client.experiment_client.ExperimentClient">
+<em class="property">class </em><code class="descclassname">thor_client.experiment_client.</code><code class="descname">ExperimentClient</code><span class="sig-paren">(</span><em>identifier</em>, <em>name</em>, <em>date</em>, <em>dims</em>, <em>auth_token</em><span class="sig-paren">)</span><a class="headerlink" href="#thor_client.experiment_client.ExperimentClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Experiment Client Class</p>
+<p>This object defines a Thor experiment within the Python environment. In
+particular, an experiment is defined by its name, the date at which it was
+created, and the dimensions of the machine learning model. Moreover, an
+authentication token is required for requesting new parameter
+configurations, for submitting observations of parameters, for viewing
+pending parameter configurations and for obtaining the best configuration
+of parameters that has been evaluated so far.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>identifier</strong> (<em>int</em>) &#8211; A unique identifier that indicates which experiment
+on the server-side is being interacted with by the client.</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; A name for the machine learning experiment. Consumers of the
+Thor service must have unique experiment names, so make sure all of
+your experiments are named different things!</li>
+<li><strong>date</strong> (<em>datetime</em>) &#8211; The datetime at which the experiment was created on the
+server side.</li>
+<li><strong>dims</strong> (<em>list of dictionaries</em>) &#8211; A list of dictionaries describing the
+parameter space of the optimization problem. Each dimension is given
+a name, a maximum value, a minimum value, and a dimension type that
+roughly describes how points are spaced.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="thor_client.experiment_client.ExperimentClient.best_configuration">
+<code class="descname">best_configuration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thor_client.experiment_client.ExperimentClient.best_configuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the configuration of parameters that produced the best value of
+the objective function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>A dictionary containing a detailed view of the</dt>
+<dd>configuration of model parameters that produced the maximal
+value of the metric. This includes the date the observation was
+created, the value of the metric, and the configuration itself.</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dictionary</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="thor_client.experiment_client.ExperimentClient.create_recommendation">
+<code class="descname">create_recommendation</code><span class="sig-paren">(</span><em>rand_prob=None</em>, <em>n_model_iters=None</em><span class="sig-paren">)</span><a class="headerlink" href="#thor_client.experiment_client.ExperimentClient.create_recommendation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a recommendation for a point to evaluate next.</p>
+<p>The create recommendation utility represents the core of the Thor
+Bayesian optimization software. This function will contact the Thor
+server and request a new configuration of machine learning parameters
+that serve the object of maximizing the metric of interest.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rand_prob</strong> (<em>optional</em><em>, </em><em>float</em>) &#8211; This parameter represents that a random
+point in the input space is chosen instead of selecting a
+configuration of parameters using Bayesian optimization. As
+such, this parameter can be used to benchmark against random
+search and otherwise to perform pure exploration of the
+parameter space.</li>
+<li><strong>n_model_iters</strong> (<em>optional</em><em>, </em><em>int</em>) &#8211; This parameter determines the number
+of maximum likelihood random restarts are used to isolate the
+maximum of the Gaussian process likelihood with respect to the
+kernel parameters. Setting this to a large value will generally
+provide better probabilistic interpolants of the metric as a
+function of the model parameters. In large-scale problems, this
+parameter instead controls the number of training iterations
+used to fit a Bayesian neural network. In particular, 1,000
+times this parameter epochs are performed.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>A recommendation client object</dt>
+<dd><p class="first last">corresponding to the recommended set of parameters.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#thor_client.recommendation_client.RecommendationClient" title="thor_client.recommendation_client.RecommendationClient">RecommendationClient</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="thor_client.experiment_client.ExperimentClient.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>dictionary</em>, <em>auth_token</em><span class="sig-paren">)</span><a class="headerlink" href="#thor_client.experiment_client.ExperimentClient.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an experiment object from a dictionary representation. Pass
+the authentication token as an additional parameter.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="thor_client.experiment_client.ExperimentClient.pending_recommendations">
+<code class="descname">pending_recommendations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thor_client.experiment_client.ExperimentClient.pending_recommendations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query for pending recommendations that have yet to be evaluated.</p>
+<p>Sometimes client-side computations may fail for a given input
+configuration of model parameters, leaving the recommendation in a kind
+of &#8220;limbo&#8221; state in which is not being evaluated but still exists. In
+this case, it can be advantageous for the client to query for such
+pending observations and to evaluate them. This function returns a list
+of pending recommendations which can then be evaluated by the client.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>A list of</dt>
+<dd>recommendation client objects, where each element in the list
+corresponds to a pending observation.</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of RecommendationClient</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="thor_client.experiment_client.ExperimentClient.submit_observation">
+<code class="descname">submit_observation</code><span class="sig-paren">(</span><em>config</em>, <em>target</em><span class="sig-paren">)</span><a class="headerlink" href="#thor_client.experiment_client.ExperimentClient.submit_observation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload a pairing of a configuration alongside an observed target
+variable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>config</strong> (<em>dictionary</em>) &#8211; A dictionary mapping dimension names to values
+indicating the configuration of parameters.</li>
+<li><strong>target</strong> (<em>float</em>) &#8211; A number indicating the performance of this
+configuration of model parameters.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>This utility is helpful in the event that a machine learning
+practitioner already has a few existing evaluations of the system at
+given inputs. For instance, the consumer may have already performed
+a grid search to obtain parameter values.</p>
+<p>Suppose that a particular experiment has two dimensions named &#8220;x&#8221;
+and &#8220;y&#8221;. Then to upload a configuration to the Thor server, we
+proceed as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mf">3.1</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span><span class="o">.</span><span class="n">submit_observation</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-thor_client.json_parser">
+<span id="thor-client-json-parser-module"></span><h2>thor_client.json_parser module<a class="headerlink" href="#module-thor_client.json_parser" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="thor_client.json_parser.json_parser">
+<code class="descclassname">thor_client.json_parser.</code><code class="descname">json_parser</code><span class="sig-paren">(</span><em>result</em>, <em>auth_token</em>, <em>cls=None</em><span class="sig-paren">)</span><a class="headerlink" href="#thor_client.json_parser.json_parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>JSON Parser Method</p>
+<p>This method transforms JSON data into usable Python objects, if required and
+generally checks for errors. Moreover, in the case that the desired Python
+object requires an authentication token, this function provides that to the
+constructor as well.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>result</strong> (<em>HTTP request object</em>) &#8211; This object will be returned by the
+<cite>requests</cite> library when a POST request is made to the server. It
+will contain information about the status of the request (400
+indicating a failure mode) and the actual value that was returned,
+encapsulated as a JSON.</li>
+<li><strong>auth_token</strong> (<em>str</em>) &#8211; String containing a user&#8217;s specific API key provided
+by the Thor server.</li>
+<li><strong>cls</strong> (Thor Python class <cite>ExperimentClient</cite> or <cite>RecommendationClient</cite>) &#8211; An
+object class representing the kind of object that should be created
+from the data contained in the JSON.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">If <cite>cls</cite> is provided and is not <cite>None</cite> then an object of type <cite>cls</cite>
+will be produced. If the JSON is a list, then a list of such <cite>cls</cite>
+objects will be produced. Otherwise, if <cite>cls</cite> is <cite>None</cite>, then
+instead the JSON data will be returned as a Python dictionary.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Object of type <cite>cls</cite> or a list of objects of type <cite>cls</cite> or dictionary</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>The JSON parser method can be used to convert a response from Thor&#8217;s
+server as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;create_experiment&quot;</span><span class="p">),</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span> <span class="o">=</span> <span class="n">json_parser</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;YOUR_AUTH_TOKEN&quot;</span><span class="p">,</span> <span class="n">ExperimentClient</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211; If the request was retrieved by a 400-code HTTP error, then
+a value error is produced.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-thor_client.recommendation_client">
+<span id="thor-client-recommendation-client-module"></span><h2>thor_client.recommendation_client module<a class="headerlink" href="#module-thor_client.recommendation_client" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="thor_client.recommendation_client.RecommendationClient">
+<em class="property">class </em><code class="descclassname">thor_client.recommendation_client.</code><code class="descname">RecommendationClient</code><span class="sig-paren">(</span><em>identifier</em>, <em>config</em>, <em>auth_token</em><span class="sig-paren">)</span><a class="headerlink" href="#thor_client.recommendation_client.RecommendationClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Thor Recommendation Client Class</p>
+<p>The purpose of this class is to provide an interface for interacting with
+suggestions provided by the Thor API. In particular, once a recommendation
+is received, it will be evaluated by the client&#8217;s local computer. After
+this, its value as a configuration will be transmitted back to the Thor
+server.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>identifier</strong> (<em>int</em>) &#8211; An integer identifier for this recommendation. This
+allows the Thor server to identify which recommendation was
+associated with a given value of the metric on the client side.</li>
+<li><strong>config</strong> (<em>dictionary</em>) &#8211; A dictionary containing the recommended parameter
+values for each dimension of the optimization problem.</li>
+<li><strong>auth_token</strong> (<em>str</em>) &#8211; String containing a user&#8217;s specific API key provided
+by the Thor server.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>The recommedation client sends metric values back to the Thor server
+using a convenient API interface.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">experiment_for_name</span><span class="p">(</span><span class="s2">&quot;YOUR_EXPERIMENT_NAME&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rec</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">create_recommendation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rec</span><span class="o">.</span><span class="n">submit_recommendation</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="classmethod">
+<dt id="thor_client.recommendation_client.RecommendationClient.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>dictionary</em>, <em>auth_token</em><span class="sig-paren">)</span><a class="headerlink" href="#thor_client.recommendation_client.RecommendationClient.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a dictionary to a recommendation client object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="thor_client.recommendation_client.RecommendationClient.submit_recommendation">
+<code class="descname">submit_recommendation</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#thor_client.recommendation_client.RecommendationClient.submit_recommendation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit the returned metric value for a point that was recommended by
+the Bayesian optimization routine.</p>
+<dl class="docutils">
+<dt>Parameters</dt>
+<dd><dl class="first last docutils">
+<dt>value (float): A number indicating the performance of this</dt>
+<dd>configuration of model parameters.</dd>
+</dl>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>A dictionary containing the recommendation identifier</dt>
+<dd>and a boolean indicator that the recommendation was submitted.</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dictionary</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-thor_client.thor_client">
+<span id="thor-client-thor-client-module"></span><h2>thor_client.thor_client module<a class="headerlink" href="#module-thor_client.thor_client" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="thor_client.thor_client.ThorClient">
+<em class="property">class </em><code class="descclassname">thor_client.thor_client.</code><code class="descname">ThorClient</code><span class="sig-paren">(</span><em>auth_token</em><span class="sig-paren">)</span><a class="headerlink" href="#thor_client.thor_client.ThorClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Thor Client Class</p>
+<p>The purpose of this module is to allow Python users to utilize the Thor
+utility for Bayesian optimization of machine learning systems. This module
+in particular is intended to properly authenticate with Thor and to create
+experiments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>auth_token</strong> (<em>str</em>) &#8211; String containing a user&#8217;s specific API key provided
+by the Thor server. This is used to authenticate with the Thor
+server as a handshake that these experiments belong to a user and
+can be viewed and edited by them.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>The Thor Client can be used to create experiments as follows.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">ThorClient</span><span class="p">(</span><span class="s2">&quot;YOUR_API_KEY&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dims</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;dim_type&quot;</span><span class="p">:</span> <span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="s2">&quot;low&quot;</span><span class="p">:</span> <span class="mf">0.</span><span class="p">,</span> <span class="s2">&quot;high&quot;</span><span class="p">:</span> <span class="mf">1.</span><span class="p">}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">create_experiment</span><span class="p">(</span><span class="s2">&quot;YOUR_EXPERIMENT_NAME&quot;</span><span class="p">,</span> <span class="n">dims</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Alternatively, the Thor Client can be used to query for existing
+experiments.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">ThorClient</span><span class="p">(</span><span class="s2">&quot;YOUR_API_KEY&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span> <span class="o">=</span> <span class="n">tc</span><span class="o">.</span><span class="n">experiment_for_name</span><span class="p">(</span><span class="s2">&quot;YOUR_EXISTING_EXPERIMENT&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="thor_client.thor_client.ThorClient.create_experiment">
+<code class="descname">create_experiment</code><span class="sig-paren">(</span><em>name</em>, <em>dimensions</em>, <em>acq_func='hedge'</em>, <em>overwrite=False</em><span class="sig-paren">)</span><a class="headerlink" href="#thor_client.thor_client.ThorClient.create_experiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; String containing the name of the experiment to create.</li>
+<li><strong>dimensions</strong> (<em>list of dictionaries</em>) &#8211; <p>A list of dictionaries that
+specify the hyperparameters of the machine learning system. Each
+dimension must specify the following four properties:</p>
+<blockquote>
+<div><ol class="arabic">
+<li>The name of the dimension, which key &#8220;name&#8221;.</li>
+<li>The type of dimension to create, which must be one of
+&#8220;linear&#8221;, &#8220;exponential&#8221;, &#8220;logarithmic&#8221;, or &#8220;integer&#8221;.<blockquote>
+<div>This is specified by the key &#8220;dim_type&#8221;.</div></blockquote>
+</li>
+<li>The minimum value of the dimension, specified by the key
+&#8220;low&#8221;.</li>
+<li>The maximum value of the dimension, specified by the key
+&#8220;high&#8221;.</li>
+</ol>
+</div></blockquote>
+</li>
+<li><strong>acq_func</strong> (<em>optional</em><em>, </em><em>str</em>) &#8211; A string containing the name of the
+acquisition function to use. This can be one of &#8220;hedge&#8221;,
+&#8220;upper_confidence_bound&#8221;, &#8220;expected_improvement&#8221;, or
+&#8220;improvement_probability&#8221;.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>A corresponding experiment with the provided name</dt>
+<dd><p class="first last">and dimensions.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#thor_client.experiment_client.ExperimentClient" title="thor_client.experiment_client.ExperimentClient">ExperimentClient</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="thor_client.thor_client.ThorClient.experiment_for_name">
+<code class="descname">experiment_for_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#thor_client.thor_client.ThorClient.experiment_for_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an experiment with a given name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) &#8211; String containing the name of the experiment that should
+be obtained.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="docutils">
+<dt>A corresponding experiment with the provided name.</dt>
+<dd>The object returned by this method is identical in functionality
+to the object that is returned by the function
+<cite>create_experiment</cite>.</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#thor_client.experiment_client.ExperimentClient" title="thor_client.experiment_client.ExperimentClient">ExperimentClient</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-thor_client">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-thor_client" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">thor_client package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-thor_client.base_url">thor_client.base_url module</a></li>
+<li><a class="reference internal" href="#module-thor_client.experiment_client">thor_client.experiment_client module</a></li>
+<li><a class="reference internal" href="#module-thor_client.json_parser">thor_client.json_parser module</a></li>
+<li><a class="reference internal" href="#module-thor_client.recommendation_client">thor_client.recommendation_client module</a></li>
+<li><a class="reference internal" href="#module-thor_client.thor_client">thor_client.thor_client module</a></li>
+<li><a class="reference internal" href="#module-thor_client">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/thor_client.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, James Brofos.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/thor_client.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
