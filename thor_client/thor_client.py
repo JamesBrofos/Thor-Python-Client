@@ -20,7 +20,7 @@ class ThorClient(object):
             can be viewed and edited by them.
 
     Examples:
-        The Thor Client can be used to create experiments as follows.
+        The Thor Client can be used to create experiments as follows:
 
         >>> tc = ThorClient("YOUR_API_KEY")
         >>> dims = [{"name": "x", "dim_type": "linear", "low": 0., "high": 1.}]
@@ -29,7 +29,6 @@ class ThorClient(object):
         Alternatively, the Thor Client can be used to query for existing
         experiments.
 
-        >>> tc = ThorClient("YOUR_API_KEY")
         >>> exp = tc.experiment_for_name("YOUR_EXISTING_EXPERIMENT")
     """
     def __init__(self, auth_token):
@@ -59,6 +58,9 @@ class ThorClient(object):
                 acquisition function to use. This can be one of "hedge",
                 "upper_confidence_bound", "expected_improvement", or
                 "improvement_probability".
+            overwrite (optional, bool): An indicator variable which will
+                overwrite existing experiments with the given name if they
+                already exist on Thor Server.
 
         Returns:
             ExperimentClient: A corresponding experiment with the provided name

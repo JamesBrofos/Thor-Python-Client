@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # Thor Python Client documentation build configuration file, created by
-# sphinx-quickstart on Tue Apr 25 07:32:19 2017.
+# sphinx-quickstart on Wed Apr 26 09:52:13 2017.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -20,6 +20,9 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+sys.path.append(os.path.abspath('../'))
 
 
 # -- General configuration ------------------------------------------------
@@ -47,8 +50,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Thor Python Client'
-copyright = '2017, James Brofos'
-author = 'James Brofos'
+copyright = '2017, The MITRE Corporation'
+author = 'The MITRE Corporation'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -80,10 +83,13 @@ todo_include_todos = False
 
 # -- Options for HTML output ----------------------------------------------
 
+# A flag to show or hide the source link in the sidebar.
+html_show_sourcelink = False
+
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'default'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -128,7 +134,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'ThorPythonClient.tex', 'Thor Python Client Documentation',
-     'James Brofos', 'manual'),
+     'The MITRE Corporation', 'manual'),
 ]
 
 
