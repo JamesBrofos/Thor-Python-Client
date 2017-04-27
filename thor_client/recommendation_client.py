@@ -40,7 +40,7 @@ class RecommendationClient(object):
         """Submit the returned metric value for a point that was recommended by
         the Bayesian optimization routine.
 
-        Parameters
+        Parameters:
             value (float): A number indicating the performance of this
                 configuration of model parameters.
 
