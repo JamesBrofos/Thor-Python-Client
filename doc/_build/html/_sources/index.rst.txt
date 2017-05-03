@@ -14,11 +14,13 @@ If you have feedback regarding Thor or Thor's Python interface, please feel free
    :maxdepth: 2
    :caption: Contents:
 
+Installation
+============
+
 
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`

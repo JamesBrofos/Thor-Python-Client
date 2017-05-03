@@ -37,8 +37,7 @@ class ThorClient(object):
         self.auth_token = auth_token
 
     def create_experiment(
-            self, name, dimensions, acq_func="hedge", overwrite=False
-    ):
+            self, name, dimensions, acq_func="hedge", overwrite=False):
         """Create an experiment.
 
         Parameters:
@@ -109,3 +108,38 @@ class ThorClient(object):
             json=post_data
         )
         return json_parser(result, self.auth_token, ExperimentClient)
+
+    def for_name_or_create(
+            self, name, dimensions, acq_func="hedge", overwrite=False):
+        """Query for an experiment and return it if it exists. Otherwise, if the
+        experiment does not exist, create it.
+
+        Parameters:
+            name (str): String containing the name of the experiment to create.
+            dimensions (list of dictionaries): A list of dictionaries that
+                specify the hyperparameters of the machine learning system. Each
+                dimension must specify the following four properties:
+                    1. The name of the dimension, which key "name".
+                    2. The type of dimension to create, which must be one of
+                       "linear", "exponential", "logarithmic", or "integer".
+                        This is specified by the key "dim_type".
+                    3. The minimum value of the dimension, specified by the key
+                       "low".
+                    4. The maximum value of the dimension, specified by the key
+                       "high".
+            acq_func (optional, str): A string containing the name of the
+                acquisition function to use. This can be one of "hedge",
+                "upper_confidence_bound", "expected_improvement", or
+                "improvement_probability".
+            overwrite (optional, bool): An indicator variable which will
+                overwrite existing experiments with the given name if they
+                already exist on Thor Server.
+
+        Returns:
+            ExperimentClient: A corresponding experiment with the provided name
+                and dimensions.
+        """
+        try:
+            return self.experiment_for_name(name)
+        except ValueError:
+            return self.create_experiment(name, dimensions, acq_func, overwrite)
