@@ -16,6 +16,6 @@ The Thor Python Client is developed and maintained by James Brofos. If you have 
 
 ## View Source
 
-To view the source code of the Thor Python Client, please visit the dedicated GitHub repository [Thor-MATLAB-Client](https://github.com/JamesBrofos/Thor-MATLAB-Client).
+To view the source code of the Thor Python Client, please visit the dedicated GitHub repository [Thor-Python-Client](https://github.com/JamesBrofos/Thor-Python-Client).
 
 We also invite you to view the source code of Thor's dedicated server by visiting the [Thor-Server](https://github.com/JamesBrofos/Thor-Server) repository. To examine the underlying Bayesian optimization technology, please visit the [Thor](https://github.com/JamesBrofos/Thor) repository.
