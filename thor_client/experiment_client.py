@@ -1,6 +1,6 @@
 import requests
 import json
-from .base_url import base_url
+from .config import auth_token, base_url
 from .recommendation_client import RecommendationClient
 from .json_parser import json_parser
 
@@ -28,14 +28,21 @@ class ExperimentClient(object):
             parameter space of the optimization problem. Each dimension is given
             a name, a maximum value, a minimum value, and a dimension type that
             roughly describes how points are spaced.
+        auth_token (str): String containing a user's specific API key provided
+            by the Thor server. This is used to authenticate with the Thor
+            server as a handshake that these experiments belong to a user and
+            can be viewed and edited by them.
+        base_url (str): String indicating the URL template for API calls.
     """
-    def __init__(self, identifier, name, date, dims, auth_token):
+    def __init__(self, identifier, name, date, dims, auth_token=auth_token,
+                 base_url=base_url):
         """Initialize parameters of the experiment client object."""
         self.experiment_id = identifier
         self.name = name
         self.date = date
         self.dims = dims
         self.auth_token = auth_token
+        self.base_url = base_url
 
     def submit_observation(self, config, target):
         """Upload a pairing of a configuration alongside an observed target
@@ -68,7 +75,7 @@ class ExperimentClient(object):
             "target": target
         }
         result = requests.post(
-            url=base_url.format("submit_observation"),
+            url=self.base_url.format("submit_observation"),
             json=post_data
         )
         return json_parser(result, self.auth_token)
@@ -109,7 +116,7 @@ class ExperimentClient(object):
             "rand_prob": rand_prob
         }
         result = requests.post(
-            url=base_url.format("create_recommendation"),
+            url=self.base_url.format("create_recommendation"),
             json=post_data
         )
         return json_parser(result, self.auth_token, RecommendationClient)
@@ -129,7 +136,7 @@ class ExperimentClient(object):
             "experiment_id": self.experiment_id
         }
         result = requests.post(
-            url=base_url.format("best_configuration"),
+            url=self.base_url.format("best_configuration"),
             json=post_data
         )
         return json_parser(result, self.auth_token)
@@ -154,7 +161,7 @@ class ExperimentClient(object):
             "experiment_id": self.experiment_id
         }
         result = requests.post(
-            url=base_url.format("pending_recommendations"),
+            url=self.base_url.format("pending_recommendations"),
             json=post_data
         )
         return json_parser(result, self.auth_token, RecommendationClient)
@@ -174,4 +181,3 @@ class ExperimentClient(object):
             dims=dictionary["dimensions"],
             auth_token=auth_token
         )
-
