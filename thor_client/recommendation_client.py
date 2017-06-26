@@ -37,6 +37,7 @@ class RecommendationClient(object):
         self.recommendation_id = identifier
         self.config = config
         self.auth_token = auth_token
+        self.base_url = base_url
 
     def submit_recommendation(self, value):
         """Submit the returned metric value for a point that was recommended by
