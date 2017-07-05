@@ -1,8 +1,8 @@
-import requests
-import json
-from .base_url import base_url
+from .config import auth_token, base_url
 from .experiment_client import ExperimentClient
 from .json_parser import json_parser
+
+import requests
 
 
 class ThorClient(object):
@@ -18,6 +18,7 @@ class ThorClient(object):
             by the Thor server. This is used to authenticate with the Thor
             server as a handshake that these experiments belong to a user and
             can be viewed and edited by them.
+        base_url (str): String indicating the URL template for API calls.
 
     Examples:
         The Thor Client can be used to create experiments as follows:
@@ -31,10 +32,11 @@ class ThorClient(object):
 
         >>> exp = tc.experiment_for_name("YOUR_EXISTING_EXPERIMENT")
     """
-    def __init__(self, auth_token):
+    def __init__(self, auth_token=auth_token, base_url=base_url):
         """Initialize the parameters of the Thor API client."""
         assert isinstance(auth_token, str)
         self.auth_token = auth_token
+        self.base_url = base_url
 
     def create_experiment(
             self, name, dimensions, acq_func="hedge", overwrite=False):
@@ -83,7 +85,7 @@ class ThorClient(object):
             "overwrite": overwrite
         }
         result = requests.post(
-            url=base_url.format("create_experiment"),
+            url=self.base_url.format("create_experiment"),
             json=post_data
         )
         return json_parser(result, self.auth_token, ExperimentClient)
@@ -104,7 +106,7 @@ class ThorClient(object):
         assert isinstance(name, str)
         post_data = {"name": name, "auth_token": self.auth_token}
         result = requests.post(
-            url=base_url.format("experiment_for_name"),
+            url=self.base_url.format("experiment_for_name"),
             json=post_data
         )
         return json_parser(result, self.auth_token, ExperimentClient)

@@ -1,13 +1,9 @@
-import numpy as np
 from thor_client import ThorClient
 from svm_on_grid import svm_on_grid
 
 
-# Authentication token.
-auth_token = "YOUR_AUTH_TOKEN"
-
 # Create experiment.
-tc = ThorClient(auth_token)
+tc = ThorClient()
 name = "Structured SVM"
 # Create space.
 dims = [
@@ -26,5 +22,3 @@ for i in range(100):
     val = -svm_on_grid(x["C"], x["alpha"], x["epsilon"])
     # Submit recommendation.
     rec.submit_recommendation(val)
-
-

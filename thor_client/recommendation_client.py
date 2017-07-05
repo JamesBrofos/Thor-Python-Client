@@ -1,6 +1,6 @@
 import requests
 import json
-from .base_url import base_url
+from .config import auth_token, base_url
 from .json_parser import json_parser
 
 
@@ -21,6 +21,7 @@ class RecommendationClient(object):
             values for each dimension of the optimization problem.
         auth_token (str): String containing a user's specific API key provided
             by the Thor server.
+        base_url (str): String indicating the URL template for API calls.
 
     Examples:
         The recommedation client sends metric values back to the Thor server
@@ -30,11 +31,13 @@ class RecommendationClient(object):
         >>> rec = exp.create_recommendation()
         >>> rec.submit_recommendation(1.0)
     """
-    def __init__(self, identifier, config, auth_token):
+    def __init__(self, identifier, config, auth_token=auth_token,
+                 base_url=base_url):
         """Initialize the parameters of the recommendation client object."""
         self.recommendation_id = identifier
         self.config = config
         self.auth_token = auth_token
+        self.base_url = base_url
 
     def submit_recommendation(self, value):
         """Submit the returned metric value for a point that was recommended by
@@ -55,7 +58,7 @@ class RecommendationClient(object):
             "value": value
         }
         result = requests.post(
-            url=base_url.format("submit_recommendation"),
+            url=self.base_url.format("submit_recommendation"),
             json=post_data
         )
         return json_parser(result, self.auth_token)

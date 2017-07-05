@@ -3,11 +3,8 @@ from thor_client import ThorClient
 from franke import franke
 
 
-# Authentication token.
-auth_token = "YOUR_AUTH_TOKEN"
-
 # Create experiment.
-tc = ThorClient(auth_token)
+tc = ThorClient()
 name = "Franke Function"
 # Create space.
 dims = [
@@ -25,4 +22,3 @@ for i in range(30):
     val = franke(np.array([x["x"], x["y"]]))
     # Submit recommendation.
     rec.submit_recommendation(val)
-
