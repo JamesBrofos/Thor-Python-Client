@@ -3,11 +3,8 @@ from thor_client import ThorClient
 from hartmann import hartmann_6
 
 
-# Authentication token.
-auth_token = "YOUR_AUTH_TOKEN"
-
 # Create experiment.
-tc = ThorClient(auth_token)
+tc = ThorClient()
 name = "Hartmann 6-D"
 # Create space.
 dims = [
@@ -31,5 +28,3 @@ for i in range(200):
     ]))
     # Submit recommendation.
     rec.submit_recommendation(val)
-
-

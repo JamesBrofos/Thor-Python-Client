@@ -1,7 +1,8 @@
-import requests
 from .config import auth_token, base_url
 from .experiment_client import ExperimentClient
 from .json_parser import json_parser
+
+import requests
 
 
 class ThorClient(object):

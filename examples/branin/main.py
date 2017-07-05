@@ -3,11 +3,8 @@ from thor_client import ThorClient
 from branin import branin_hoo
 
 
-# Authentication token.
-auth_token = "YOUR_AUTH_TOKEN"
-
 # Create experiment.
-tc = ThorClient(auth_token)
+tc = ThorClient()
 name = "Branin-Hoo"
 # Create space.
 dims = [
@@ -25,5 +22,3 @@ for i in range(200):
     val = -branin_hoo(np.array([x["x1"], x["x2"]]))
     # Submit recommendation.
     rec.submit_recommendation(val)
-
-
