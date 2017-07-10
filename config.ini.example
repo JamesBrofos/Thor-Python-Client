@@ -1,3 +1,3 @@
 [thor]
 base_url = http://127.0.0.1/api/{}/
-auth_token = 'YOUR_API_TOKEN_HERE'
+auth_token = YOUR_API_TOKEN_HERE
