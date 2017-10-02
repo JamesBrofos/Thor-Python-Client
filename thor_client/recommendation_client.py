@@ -22,22 +22,32 @@ class RecommendationClient(object):
         auth_token (str): String containing a user's specific API key provided
             by the Thor server.
         base_url (str): String indicating the URL template for API calls.
+        description (str, optional): Optional text describing a particular
+            observation/recommendation.
 
     Examples:
-        The recommedation client sends metric values back to the Thor server
+        The recommendation client sends metric values back to the Thor server
         using a convenient API interface.
 
         >>> exp = tc.experiment_for_name("YOUR_EXPERIMENT_NAME")
         >>> rec = exp.create_recommendation()
         >>> rec.submit_recommendation(1.0)
+
+        To add a description to a recommendation, pass it to
+        create_recommendation().
+
+        >>> exp = tc.experiment_for_name("YOUR_EXPERIMENT_NAME")
+        >>> rec = exp.create_recommendation(description="run-123")
+        >>> rec.submit_recommendation(1.0)
     """
     def __init__(self, identifier, config, auth_token=auth_token,
-                 base_url=base_url):
+                 base_url=base_url, description=""):
         """Initialize the parameters of the recommendation client object."""
         self.recommendation_id = identifier
         self.config = config
         self.auth_token = auth_token
         self.base_url = base_url
+        self.description = description
 
     def submit_recommendation(self, value):
         """Submit the returned metric value for a point that was recommended by
@@ -69,5 +79,6 @@ class RecommendationClient(object):
         return cls(
             identifier=dictionary["id"],
             config=json.loads(dictionary["config"]),
-            auth_token=auth_token
+            auth_token=auth_token,
+            description=dictionary["description"]
         )

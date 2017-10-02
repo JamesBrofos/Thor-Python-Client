@@ -80,7 +80,8 @@ class ExperimentClient(object):
         )
         return json_parser(result, self.auth_token)
 
-    def create_recommendation(self, rand_prob=None, n_model_iters=None):
+    def create_recommendation(self, rand_prob=None, n_model_iters=None,
+                              description=''):
         """Get a recommendation for a point to evaluate next.
 
         The create recommendation utility represents the core of the Thor
@@ -104,6 +105,9 @@ class ExperimentClient(object):
                 parameter instead controls the number of training iterations
                 used to fit a Bayesian neural network. In particular, 1,000
                 times this parameter epochs are performed.
+            description (optional, str): An optional per-observation
+                descriptor, potentially useful for identifying one observation
+                among many others in a large experiment.  Defaults to "".
 
         Returns:
             RecommendationClient: A recommendation client object
@@ -113,7 +117,8 @@ class ExperimentClient(object):
             "auth_token": self.auth_token,
             "experiment_id": self.experiment_id,
             "n_model_iters": n_model_iters,
-            "rand_prob": rand_prob
+            "rand_prob": rand_prob,
+            "description": description
         }
         result = requests.post(
             url=self.base_url.format("create_recommendation"),
