@@ -11,7 +11,7 @@ dims = [
     {"name": "x", "dim_type": "linear", "low": 0., "high": 1.},
     {"name": "y", "dim_type": "linear", "low": 0., "high": 1.}
 ]
-exp = tc.create_experiment(name, dims)
+exp = tc.create_experiment(name, dims, overwrite=True)
 
 # Main optimization loop.
 for i in range(30):

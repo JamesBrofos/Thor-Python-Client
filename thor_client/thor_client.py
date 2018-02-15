@@ -39,7 +39,12 @@ class ThorClient(object):
         self.base_url = base_url
 
     def create_experiment(
-            self, name, dimensions, acq_func="hedge", overwrite=False):
+            self,
+            name,
+            dimensions,
+            acq_func="expected_improvement",
+            overwrite=False
+    ):
         """Create an experiment.
 
         Parameters:
