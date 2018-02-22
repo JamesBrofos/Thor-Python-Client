@@ -11,7 +11,7 @@ dims = [
     {"name": "tau", "dim_type": "integer", "low": 0, "high": 5},
     {"name": "S", "dim_type": "integer", "low": 0, "high": 7},
 ]
-exp = tc.create_experiment(name, dims)
+exp = tc.create_experiment(name, dims, overwrite=True)
 
 # Main optimization loop.
 for i in range(100):
