@@ -80,8 +80,8 @@ class ExperimentClient(object):
         )
         return json_parser(result, self.auth_token)
 
-    def create_recommendation(self, rand_prob=None, n_model_iters=None,
-                              description=''):
+    def create_recommendation(self, rand_prob=None, n_models=None,
+                              description=""):
         """Get a recommendation for a point to evaluate next.
 
         The create recommendation utility represents the core of the Thor
@@ -96,15 +96,10 @@ class ExperimentClient(object):
                 such, this parameter can be used to benchmark against random
                 search and otherwise to perform pure exploration of the
                 parameter space.
-            n_model_iters (optional, int): This parameter determines the number
-                of maximum likelihood random restarts are used to isolate the
-                maximum of the Gaussian process likelihood with respect to the
-                kernel parameters. Setting this to a large value will generally
-                provide better probabilistic interpolants of the metric as a
-                function of the model parameters. In large-scale problems, this
-                parameter instead controls the number of training iterations
-                used to fit a Bayesian neural network. In particular, 1,000
-                times this parameter epochs are performed.
+            n_models (optional, int): The number of Gaussian process models to
+                sample using elliptical slice sampling. Setting this to a large
+                number will produce a better characterization of uncertainty in
+                the acquisition function.
             description (optional, str): An optional per-observation
                 descriptor, potentially useful for identifying one observation
                 among many others in a large experiment.  Defaults to "".
@@ -116,7 +111,7 @@ class ExperimentClient(object):
         post_data = {
             "auth_token": self.auth_token,
             "experiment_id": self.experiment_id,
-            "n_model_iters": n_model_iters,
+            "n_models": n_models,
             "rand_prob": rand_prob,
             "description": description
         }

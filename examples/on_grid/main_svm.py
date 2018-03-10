@@ -11,7 +11,7 @@ dims = [
     {"name": "alpha", "dim_type": "integer", "low": 0, "high": 13},
     {"name": "epsilon", "dim_type": "integer", "low": 0, "high": 3},
 ]
-exp = tc.create_experiment(name, dims)
+exp = tc.create_experiment(name, dims, overwrite=True)
 
 # Main optimization loop.
 for i in range(100):
