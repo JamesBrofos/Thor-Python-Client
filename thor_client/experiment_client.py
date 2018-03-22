@@ -80,7 +80,7 @@ class ExperimentClient(object):
         )
         return json_parser(result, self.auth_token)
 
-    def create_recommendation(self, rand_prob=None, n_models=None,
+    def create_recommendation(self, rand_prob=0., n_models=5,
                               description=""):
         """Get a recommendation for a point to evaluate next.
 
