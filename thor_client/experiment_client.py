@@ -80,8 +80,13 @@ class ExperimentClient(object):
         )
         return json_parser(result, self.auth_token)
 
-    def create_recommendation(self, rand_prob=0., n_models=5,
-                              description=""):
+    def create_recommendation(
+            self,
+            rand_prob=0.,
+            n_models=5,
+            description="",
+            acq_func="expected_improvement"
+    ):
         """Get a recommendation for a point to evaluate next.
 
         The create recommendation utility represents the core of the Thor
@@ -103,6 +108,10 @@ class ExperimentClient(object):
             description (optional, str): An optional per-observation
                 descriptor, potentially useful for identifying one observation
                 among many others in a large experiment.  Defaults to "".
+            acq_func (optional, str): A string specifying which acquisition
+                function should be used to construct the newest recommendation.
+                It can be useful to sometimes vary the acquisition function to
+                enable exploitation towards the end of an experiment.
 
         Returns:
             RecommendationClient: A recommendation client object
@@ -113,7 +122,8 @@ class ExperimentClient(object):
             "experiment_id": self.experiment_id,
             "n_models": n_models,
             "rand_prob": rand_prob,
-            "description": description
+            "description": description,
+            "acq_func": acq_func
         }
         result = requests.post(
             url=self.base_url.format("create_recommendation"),

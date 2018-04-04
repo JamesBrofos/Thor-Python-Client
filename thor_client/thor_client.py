@@ -42,7 +42,6 @@ class ThorClient(object):
             self,
             name,
             dimensions,
-            acq_func="expected_improvement",
             overwrite=False
     ):
         """Create an experiment.
@@ -60,10 +59,6 @@ class ThorClient(object):
                        "low".
                     4. The maximum value of the dimension, specified by the key
                        "high".
-            acq_func (optional, str): A string containing the name of the
-                acquisition function to use. This can be one of "hedge",
-                "upper_confidence_bound", "expected_improvement", or
-                "improvement_probability".
             overwrite (optional, bool): An indicator variable which will
                 overwrite existing experiments with the given name if they
                 already exist on Thor Server.
@@ -73,7 +68,6 @@ class ThorClient(object):
                 and dimensions.
         """
         assert isinstance(name, str)
-        assert isinstance(acq_func, str)
         assert isinstance(dimensions, list) or isinstance(dimensions, dict)
         if isinstance(dimensions, list):
             for dim in dimensions:
@@ -86,7 +80,6 @@ class ThorClient(object):
             "name": name,
             "auth_token": self.auth_token,
             "dimensions": dimensions,
-            "acq_func": acq_func,
             "overwrite": overwrite
         }
         result = requests.post(
@@ -116,8 +109,7 @@ class ThorClient(object):
         )
         return json_parser(result, self.auth_token, ExperimentClient)
 
-    def for_name_or_create(
-            self, name, dimensions, acq_func="hedge", overwrite=False):
+    def for_name_or_create(self, name, dimensions):
         """Query for an experiment and return it if it exists. Otherwise, if the
         experiment does not exist, create it.
 
@@ -149,4 +141,4 @@ class ThorClient(object):
         try:
             return self.experiment_for_name(name)
         except ValueError:
-            return self.create_experiment(name, dimensions, acq_func, overwrite)
+            return self.create_experiment(name, dimensions)

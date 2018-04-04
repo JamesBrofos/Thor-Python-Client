@@ -61,11 +61,10 @@ class RecommendationClient(object):
             dictionary: A dictionary containing the recommendation identifier
                 and a boolean indicator that the recommendation was submitted.
         """
-        assert isinstance(value, float)
         post_data = {
             "auth_token": self.auth_token,
             "recommendation_id": self.recommendation_id,
-            "value": value
+            "value": float(value)
         }
         result = requests.post(
             url=self.base_url.format("submit_recommendation"),
