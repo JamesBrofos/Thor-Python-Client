@@ -1,15 +1,15 @@
 import numpy as np
 from thor_client import ThorClient
-from branin import branin_hoo as obj
+from goldstein import goldstein as obj
 
 
 # Create experiment.
 tc = ThorClient()
-name = "Branin-Hoo"
+name = "Goldstein-Price"
 # Create space.
 dims = [
-    {"name": "x1", "dim_type": "linear", "low": -5., "high": 10.},
-    {"name": "x2", "dim_type": "linear", "low": 0., "high": 15.},
+    {"name": "x1", "dim_type": "linear", "low": -2., "high": 2.},
+    {"name": "x2", "dim_type": "linear", "low": -2., "high": 2.},
 ]
 exp = tc.create_experiment(name, dims, overwrite=True)
 

@@ -1,6 +1,6 @@
 import numpy as np
 from thor_client import ThorClient
-from shekel import shekel
+from shekel import shekel as obj
 
 
 # Create experiment.
@@ -18,10 +18,9 @@ exp = tc.create_experiment(name, dims, overwrite=True)
 # Main optimization loop.
 for i in range(10000):
     # Request new recommendation.
-    rand_prob = 1.
-    rec = exp.create_recommendation(rand_prob=rand_prob)
-    x = rec.config
+    rec = exp.create_recommendation()
+    x = r.config
     # Evaluate new recommendation.
-    val = shekel(np.array([x["x1"], x["x2"], x["x3"], x["x4"]]))
+    val = obj(np.array([x["x1"], x["x2"], x["x3"], x["x4"]]))
     # Submit recommendation.
     rec.submit_recommendation(val)

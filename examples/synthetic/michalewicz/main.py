@@ -1,6 +1,6 @@
 import numpy as np
 from thor_client import ThorClient
-from michalewicz import michalewicz
+from michalewicz import michalewicz as obj
 
 
 # Create experiment.
@@ -27,7 +27,7 @@ for i in range(200):
     rec = exp.create_recommendation()
     x = rec.config
     # Evaluate new recommendation.
-    val = michalewicz(np.array([
+    val = obj(np.array([
         x["x1"],
         x["x2"],
         x["x3"],

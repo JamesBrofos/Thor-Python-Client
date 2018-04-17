@@ -1,15 +1,17 @@
 import numpy as np
 from thor_client import ThorClient
-from branin import branin_hoo as obj
+from levy import levy as obj
 
 
 # Create experiment.
 tc = ThorClient()
-name = "Branin-Hoo"
+name = "Levy"
 # Create space.
 dims = [
-    {"name": "x1", "dim_type": "linear", "low": -5., "high": 10.},
-    {"name": "x2", "dim_type": "linear", "low": 0., "high": 15.},
+    {"name": "x1", "dim_type": "linear", "low": -10., "high": 10.},
+    {"name": "x2", "dim_type": "linear", "low": -10., "high": 10.},
+    {"name": "x3", "dim_type": "linear", "low": -10., "high": 10.},
+    {"name": "x4", "dim_type": "linear", "low": -10., "high": 10.},
 ]
 exp = tc.create_experiment(name, dims, overwrite=True)
 
@@ -19,6 +21,6 @@ for i in range(200):
     rec = exp.create_recommendation()
     x = rec.config
     # Evaluate new recommendation.
-    val = obj(np.array([x["x1"], x["x2"]]))
+    val = obj(np.array([x["x1"], x["x2"], x["x3"], x["x4"]]))
     # Submit recommendation.
     rec.submit_recommendation(val)

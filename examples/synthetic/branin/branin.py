@@ -19,4 +19,4 @@ def branin_hoo(x):
 
     y = term1 + term2 + s
 
-    return y
+    return -y

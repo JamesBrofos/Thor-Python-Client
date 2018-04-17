@@ -85,7 +85,8 @@ class ExperimentClient(object):
             rand_prob=0.,
             n_models=5,
             description="",
-            acq_func="expected_improvement"
+            acq_func="expected_improvement",
+            integrate_acq=True
     ):
         """Get a recommendation for a point to evaluate next.
 
@@ -112,6 +113,11 @@ class ExperimentClient(object):
                 function should be used to construct the newest recommendation.
                 It can be useful to sometimes vary the acquisition function to
                 enable exploitation towards the end of an experiment.
+            integrate_acq (optional, bool): An indicator for whether or not we
+                should construct an integrated acquisition function using models
+                sampled from the posterior. The alternative is to not integrate
+                and to return a single recommendation for each of the sampled
+                models, of which there are `n_models`.
 
         Returns:
             RecommendationClient: A recommendation client object
@@ -123,13 +129,15 @@ class ExperimentClient(object):
             "n_models": n_models,
             "rand_prob": rand_prob,
             "description": description,
-            "acq_func": acq_func
+            "acq_func": acq_func,
+            "integrate_acq": integrate_acq
         }
         result = requests.post(
             url=self.base_url.format("create_recommendation"),
             json=post_data
         )
-        return json_parser(result, self.auth_token, RecommendationClient)
+        recs = json_parser(result, self.auth_token, RecommendationClient)
+        return recs[0] if len(recs) == 1 else recs
 
     def best_configuration(self):
         """Get the configuration of parameters that produced the best value of

@@ -1,6 +1,6 @@
 import numpy as np
 from thor_client import ThorClient
-from franke import franke
+from franke import franke as obj
 
 
 # Create experiment.
@@ -14,11 +14,11 @@ dims = [
 exp = tc.create_experiment(name, dims, overwrite=True)
 
 # Main optimization loop.
-for i in range(30):
+for i in range(8):
     # Request new recommendation.
     rec = exp.create_recommendation()
     x = rec.config
     # Evaluate new recommendation.
-    val = franke(np.array([x["x"], x["y"]]))
+    val = obj(np.array([x["x"], x["y"]]))
     # Submit recommendation.
     rec.submit_recommendation(val)

@@ -34,5 +34,5 @@ def hartmann_6(x, original=True):
     # Compute the Hartmann 6-D function.
     y = -outer if original else -(2.58 + outer) / 1.94
 
-    return y
+    return -y
 

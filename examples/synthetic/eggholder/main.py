@@ -1,6 +1,6 @@
 import numpy as np
 from thor_client import ThorClient
-from eggholder import eggholder
+from eggholder import eggholder as obj
 
 # Create experiment.
 tc = ThorClient()
@@ -18,6 +18,6 @@ for i in range(200):
     rec = exp.create_recommendation()
     x = rec.config
     # Evaluate new recommendation.
-    val = eggholder(np.array([x["x1"], x["x2"]]))
+    val = obj(np.array([x["x1"], x["x2"]]))
     # Submit recommendation.
-    rec.submit_recommendation(val)
+    r.submit_recommendation(val)
