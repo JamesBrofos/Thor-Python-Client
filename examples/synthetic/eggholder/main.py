@@ -20,4 +20,4 @@ for i in range(200):
     # Evaluate new recommendation.
     val = obj(np.array([x["x1"], x["x2"]]))
     # Submit recommendation.
-    r.submit_recommendation(val)
+    rec.submit_recommendation(val)

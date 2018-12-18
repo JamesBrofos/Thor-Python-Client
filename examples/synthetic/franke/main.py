@@ -14,7 +14,7 @@ dims = [
 exp = tc.create_experiment(name, dims, overwrite=True)
 
 # Main optimization loop.
-for i in range(8):
+for i in range(30):
     # Request new recommendation.
     rec = exp.create_recommendation()
     x = rec.config

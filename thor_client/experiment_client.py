@@ -121,7 +121,10 @@ class ExperimentClient(object):
 
         Returns:
             RecommendationClient: A recommendation client object
-                corresponding to the recommended set of parameters.
+                corresponding to the recommended set of parameters. If the
+                acquisition function is not integrated, a list of
+                RecommendationClient objects may be returned instead, one for
+                each sampled model.
         """
         post_data = {
             "auth_token": self.auth_token,
