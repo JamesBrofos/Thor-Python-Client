@@ -1,7 +1,7 @@
 certifi==2018.1.18
 chardet==3.0.4
 idna==2.6
-numpy==1.14.2
+numpy==1.22.0
 requests==2.18.4
 -e git+git@github.com:JamesBrofos/Thor-Python-Client.git@9256e934636510aaf02fe694f8e75028b0cb56d7#egg=thor_client
 urllib3==1.22
